@@ -1,0 +1,24 @@
+[%# This Source Code Form is subject to the terms of the Mozilla Public
+  # License, v. 2.0. If a copy of the MPL was not distributed with this
+  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  #
+  # This Source Code Form is "Incompatible With Secondary Licenses", as
+  # defined by the Mozilla Public License, v. 2.0.
+  #%]
+[%
+    title = "Assign on Severity"
+    desc = "Configure the Assign on Severity feature"
+%]
+
+[% param_descs = {
+    aos_enabled         => "Enable (On) or Disable (Off) the Assign on Severity extension",
+    aos_add_to_cc       => "Add original assignee to cc list if issue is reassigned",
+    aos_remove_from_cc  => "Remove new assignee from cc list if new assignee is on default cc list",
+    aos_config          => "Add aos configurations in formats:
+        severity = name,
+        product severity = name or
+        product component severity = name.
+        Search order is product component severity, product severity, severity.
+        Search is case insensitive.",
+}
+%]
