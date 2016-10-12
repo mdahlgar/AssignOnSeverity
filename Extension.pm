@@ -13,7 +13,7 @@ use warnings;
 
 use parent qw(Bugzilla::Extension);
 
-our $VERSION = '1.0';
+our $VERSION = '1.0.1';
 
 sub enabled {
     return 1;
@@ -42,7 +42,7 @@ sub bug_end_of_create_validators {
     my $aos = Bugzilla->params->{'aos_enabled'};
     # try to read aos assing_to, return if not found
     my $aos_config = Bugzilla->params->{'aos_config'};
-    if (!$aos || $aos == 0 || !$aos_config) { return; }
+    if (!$aos || $aos == 0 || !$aos_config) { return }
     # read not required add to cc setting and remove from cc settings
     my $aos_add_to_cc = Bugzilla->params->{'aos_add_to_cc'};
     my $aos_rm_from_cc = Bugzilla->params->{'aos_remove_from_cc'};
@@ -107,14 +107,14 @@ sub bug_end_of_create_validators {
             my $assignee_id = $bug_params->{assigned_to};
             $bug_params->{assigned_to} = $userid;
 
+            my $cc_array = $bug_params->{cc};
             # add original assignee to cc list if aos_add_to_cc = 1
             if($aos_add_to_cc && $aos_add_to_cc == 1 && $assignee_id) {
-                my $cc_array = $bug_params->{cc};
                 push @$cc_array, $assignee_id;
-                # remove new assignee from cc list
-                if($aos_rm_from_cc && $aos_rm_from_cc == 1) {
-                    @$cc_array = grep { $_ != $userid } @$cc_array;
-                }
+            }
+            # remove new assignee from cc list
+            if($aos_rm_from_cc && $aos_rm_from_cc == 1) {
+                @$cc_array = grep { $_ != $userid } @$cc_array;
             }
         }
     }
