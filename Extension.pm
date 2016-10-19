@@ -76,15 +76,15 @@ sub bug_end_of_create_validators {
     if(!$product_name || !$component_name) {return}
 
     # 5. search aos_config for product component severity configuration
-    my ($username) = ($aos_config =~ m/$product_name[\s|.]*$component_name[\s|.]*$severity\s*[:|=]\s*(\S+)/i);
+    my ($username) = ($aos_config =~ m/^$product_name[\s|.]*$component_name[\s|.]*$severity\s*[:|=]\s*(\S+)/mi);
 
     if(!$username) {
         #username not found, check product severity
-        ($username) = ($aos_config =~ m/$product_name[\s|.]*$severity\s*[:|=]\s*(\S+)/i);
+        ($username) = ($aos_config =~ m/^$product_name[\s|.]*$severity\s*[:|=]\s*(\S+)/mi);
 
         if(!$username) {
             #username not found, check severity
-            ($username) = ($aos_config =~ m/$severity\s*[:|=]\s*(\S+)/i);
+            ($username) = ($aos_config =~ m/^$severity\s*[:|=]\s*(\S+)/mi);
         }
     }
 
