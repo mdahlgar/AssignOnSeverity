@@ -23,7 +23,7 @@ To modify AssignOnSeverity settings open the adminstration/parameters/AssignOnSe
     3. product component severity = login name or real name
 
     Search order is from 3. to 1. If a name is not found from 3. 2. is searched and then 1. The issue is not re-assigned if no name is found.
-    The search is case insensitive, accepts : or = and .'s or whitespace's between product/component/severity.
+    The search is case insensitive, accepts : or = and .'s or whitespace's between product/component/severity and requires one configuration per line.
 
     Default is no configuration, checking reset will remove all configurations.
 
