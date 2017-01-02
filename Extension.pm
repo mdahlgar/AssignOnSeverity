@@ -108,9 +108,15 @@ sub bug_end_of_create_validators {
             $bug_params->{assigned_to} = $userid;
 
             my $cc_array = $bug_params->{cc};
-            # add original assignee to cc list if aos_add_to_cc = 1
+            # add original assignee to cc list if aos_add_to_cc = 1 and
+            # the original assignee is not already on the cc list
             if($aos_add_to_cc && $aos_add_to_cc == 1 && $assignee_id) {
-                push @$cc_array, $assignee_id;
+                # do not add the same ID twice to the cc array or Bugzilla will
+                # not be able to insert the data into the cc table as the primary key
+                # is a combination of bug id and assignee id.
+                if(!grep { $_ == $assignee_id } @cc_array) {
+                    push @$cc_array, $assignee_id;
+                }
             }
             # remove new assignee from cc list
             if($aos_rm_from_cc && $aos_rm_from_cc == 1) {
