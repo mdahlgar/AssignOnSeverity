@@ -13,7 +13,7 @@ use warnings;
 
 use parent qw(Bugzilla::Extension);
 
-our $VERSION = '1.0.2';
+our $VERSION = '1.0.3';
 
 sub enabled {
     return 1;
