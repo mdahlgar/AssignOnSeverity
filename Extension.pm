@@ -114,7 +114,7 @@ sub bug_end_of_create_validators {
                 # do not add the same ID twice to the cc array or Bugzilla will
                 # not be able to insert the data into the cc table as the primary key
                 # is a combination of bug id and assignee id.
-                if(!grep { $_ == $assignee_id } @cc_array) {
+                if(!grep { $_ == $assignee_id } @$cc_array) {
                     push @$cc_array, $assignee_id;
                 }
             }
